@@ -1,6 +1,6 @@
 const util = require('util');
 const EventEmitter = require('events').EventEmitter;
-const fastparallel = require('fastparallel');
+const neoAsync = require('neoAsync');
 
 const IntSequencer = function (config) {
     if (!(this instanceof IntSequencer)) {
@@ -59,7 +59,7 @@ const IntSequencer = function (config) {
                     tmp.push([ch, finish, transition]);
                 }
             });
-            fastparallel.each(tmp, startTransition, callback);
+            neoAsync.each(tmp, startTransition, callback);
         } else {
             config.setter(scene);
             if (typeof callback === 'function') {

@@ -1,6 +1,6 @@
 {
   "name": "scene-sequencer",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Calculate sequences between scenes with variable transition time",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/hobbyquaker/scene-sequencer#readme",
   "dependencies": {
-    "fastparallel": "^2.3.0"
+    "neo-async": "^2.3.0"
   },
   "devDependencies": {
     "xo": "latest"
