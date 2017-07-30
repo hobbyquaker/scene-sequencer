@@ -1,6 +1,6 @@
 {
   "name": "scene-sequencer",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Calculate sequences between scenes with variable transition time",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hobbyquaker/sequencer.git"
+    "url": "git+https://github.com/hobbyquaker/scene-sequencer.git"
   },
   "keywords": [
     "DMX",
@@ -19,13 +19,13 @@
   "author": "Sebastian Raff <hq@ccu.io>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hobbyquaker/sequencer/issues"
+    "url": "https://github.com/hobbyquaker/scene-sequencer/issues"
   },
-  "homepage": "https://github.com/hobbyquaker/sequencer#readme",
+  "homepage": "https://github.com/hobbyquaker/scene-sequencer#readme",
   "dependencies": {
-    "async": "^2.5.0"
+    "fastparallel": "^2.3.0"
   },
   "devDependencies": {
-    "xo": "^0.18.2"
+    "xo": "latest"
   }
 }

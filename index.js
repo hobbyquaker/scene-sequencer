@@ -1,6 +1,6 @@
 const util = require('util');
 const EventEmitter = require('events').EventEmitter;
-const async = require('async');
+const fastparallel = require('fastparallel');
 
 const IntSequencer = function (config) {
     if (!(this instanceof IntSequencer)) {
@@ -59,7 +59,7 @@ const IntSequencer = function (config) {
                     tmp.push([ch, finish, transition]);
                 }
             });
-            async.each(tmp, startTransition, callback);
+            fastparallel.each(tmp, startTransition, callback);
         } else {
             config.setter(scene);
             if (typeof callback === 'function') {
@@ -68,14 +68,12 @@ const IntSequencer = function (config) {
         }
 
         function startTransition(args, callback) {
-            const ch = args[0];
-            const finish = args[1];
-            let transition = args[2];
+            let [ch, finish, transition] = args;
 
             transition = parseFloat(transition) || 1;
             const start = (config.data && config.data[ch]) || 0;
-
             const step = (finish - start) / ticksPerSecond / transition;
+
             if (transitions[ch]) {
                 that.emit('transition-conflict', ch);
                 if (typeof callback === 'function') {
@@ -109,10 +107,6 @@ const IntSequencer = function (config) {
         seqStep();
 
         function seqStep() {
-            if (pause) {
-                return;
-            }
-
             const len = seq.length;
             step += 1;
 
@@ -138,8 +132,10 @@ const IntSequencer = function (config) {
             that.setScene([seq[index][0], (seq[index][1] / speed) || 0], () => {
                 that.emit('step', {sequence, scene: seq[index][0], index, action: 'hold'});
                 setTimeout(() => {
-                    that.emit('step', {sequence, scene: seq[index][0], index, action: 'finish'});
-                    seqStep();
+                    if (!pause) {
+                        that.emit('step', {sequence, scene: seq[index][0], index, action: 'finish'});
+                        seqStep();
+                    }
                 }, duration);
             });
         }
@@ -156,6 +152,10 @@ const IntSequencer = function (config) {
 
         this.resume = function () {
             pause = false;
+            seqStep();
+        };
+
+        this.next = function () {
             seqStep();
         };
 
