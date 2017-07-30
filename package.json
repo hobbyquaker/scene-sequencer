@@ -1,6 +1,6 @@
 {
   "name": "scene-sequencer",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Calculate sequences between scenes with variable transition time",
   "main": "index.js",
   "scripts": {

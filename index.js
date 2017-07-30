@@ -1,6 +1,6 @@
 const util = require('util');
 const EventEmitter = require('events').EventEmitter;
-const neoAsync = require('neoAsync');
+const neoAsync = require('neo-async');
 
 const IntSequencer = function (config) {
     if (!(this instanceof IntSequencer)) {
